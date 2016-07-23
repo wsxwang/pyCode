@@ -1,4 +1,7 @@
 #-*-coding:utf-8-*-
+"""
+2016年6月给老友做的合并excel表格的程序
+"""
 
 import xlrd
 import xlwt
