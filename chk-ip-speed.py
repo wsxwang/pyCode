@@ -10,7 +10,11 @@ import re
 import sys
 
 def ping_speed(ip):
-    output = os.popen("ping " + ip + " -n 1")
+    if os.name == "nt":
+        cmd = "ping " + ip + " -n 1";
+    else:
+        cmd = "ping " + ip + " -c 1";
+    output = os.popen(cmd);
     echoInfo = output.read();
     m = re.search("=(?P<speed>\d+)ms", echoInfo);
     if m != None:
