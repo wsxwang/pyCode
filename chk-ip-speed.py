@@ -12,16 +12,14 @@ import sys
 def ping_speed(ip):
     if os.name == "nt":
         cmd = "ping " + ip + " -n 1";
-        pattern = "=(?P<speed>)\d+ms";
+        pattern = "=(?P<speed>\d+)ms";
     else:
         cmd = "ping " + ip + " -c 2";
-        pattern = "=(?P<speed>)\d+ ms";
+        pattern = "=(?P<speed>\d+) ms";
     output = os.popen(cmd);
     echoInfo = output.read();
     m = re.search(pattern, echoInfo);
     if m != None:
-        print m.group[0];
-        print m.group("speed");
         return int(m.group("speed"));
     return sys.maxint;
    
