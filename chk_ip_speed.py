@@ -9,6 +9,8 @@ import time
 import re
 import sys
 
+import chk_ip_string as chkipstr
+
 def ping_speed(ip):
     if os.name == "nt":
         cmd = "ping " + ip + " -n 1";
@@ -24,6 +26,7 @@ def ping_speed(ip):
     return sys.maxint;
    
 if __name__ == "__main__":
+    
     ip_lst = ["172.86.224.36"
               ,"173.247.231.43"
               ,"173.247.233.252"
@@ -42,6 +45,14 @@ if __name__ == "__main__":
               ,"174.139.43.45"
               ,"173.247.231.45"
               ];
+
+    if os.path.exists("src.txt"):
+        f = open("src.txt", "rt");
+        srcstr = f.read();
+        f.close();
+        ip_lst += chkipstr.find_ip(srcstr);
+
+    print ip_lst;
     ip_speed_lst = [];
     for ip in ip_lst:
         pairs = (ip, ping_speed(ip));
